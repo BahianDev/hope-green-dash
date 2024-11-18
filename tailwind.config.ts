@@ -11,8 +11,15 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "green-base": "#657E00",
+        "davys-gray": "#484848",
+        "light-gray": "#E5E5E5",
+        'custom-gray': '#D9D9D9',
+
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 } satisfies Config;
