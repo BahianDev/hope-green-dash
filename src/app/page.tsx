@@ -3,10 +3,11 @@ import GoogleMapComponent from "@/components/GoogleMapComponent";
 import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
   const modal = useRef<HTMLDialogElement>(null);
+  const [currentPlano, setCurrentPlano] = useState<any>();
 
   const { data: planos } = useQuery({
     queryKey: ["files-list"],
@@ -102,6 +103,7 @@ export default function Home() {
                   <button
                     onClick={() => {
                       if (modal.current) {
+                        setCurrentPlano(plano);
                         modal.current.showModal();
                       }
                     }}
@@ -152,22 +154,25 @@ export default function Home() {
       </div>
       <dialog id="my_modal_2" className="modal mt-24" ref={modal}>
         <div className="modal-box bg-custom-gray border-green-base border-2 max-w-7xl h-full flex">
-          <div className="bg-green-700 text-white w-1/3 p-6 flex flex-col justify-between">
+          <div className="bg-green-base text-white w-1/3 p-6 flex flex-col justify-between">
             <div>
-              <Image src="/avatar.png" width={100} height={100} alt="profile" className="rounded-full" />
-              <h2 className="text-2xl font-bold">FRANCISCO OLIVEIRA</h2>
-              <p className="mt-4 text-sm">
-                Rodovia BR 319, km 23 <br />
-                Ramal das Castanhas <br />
-                Comunidade Água Azul <br />
-                Canutama - AM
-              </p>
+              <Image
+                src="/avatar.png"
+                width={100}
+                height={100}
+                alt="profile"
+                className="rounded-full"
+              />
+              <h2 className="text-2xl font-bold uppercase">
+                {currentPlano?.user.name}
+              </h2>
+              <p className="mt-4 text-sm max-w-40">{currentPlano?.endereco}</p>
               <div className="mt-6">
                 <div className="flex items-center gap-2 mb-2">
                   <span>📅</span> January, 2025
                 </div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span>✉️</span> franoliveir@gmail.com
+                  <span>✉️</span> {currentPlano?.user.email}
                 </div>
                 <div className="flex items-center gap-2">
                   <span>📞</span> +55 92 0000-0000
@@ -202,51 +207,54 @@ export default function Home() {
 
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <p className="text-xl text-black font-bold">0,7</p>
+                <p className="text-xl text-black font-bold">
+                  {currentPlano?.hectare}
+                </p>
                 <p className="text-gray-500">Hectares</p>
               </div>
               <div>
-                <p className="text-xl text-black font-bold">150 m²</p>
+                <p className="text-xl text-black font-bold">
+                  {currentPlano?.espacamento} m²
+                </p>
                 <p className="text-gray-500">Espaçamento</p>
               </div>
               <div>
-                <p className="text-xl text-black font-bold">6</p>
+                <p className="text-xl text-black font-bold">
+                  {currentPlano?.linhas}
+                </p>
                 <p className="text-gray-500">Linhas</p>
               </div>
               <div>
-                <p className="text-xl text-black font-bold">RL</p>
+                <p className="text-xl text-black font-bold">
+                  {currentPlano?.tipoDeArea}
+                </p>
                 <p className="text-gray-500">Tipo de Área</p>
               </div>
-            </div>
-
-            <div className="mt-6">
-              <h3 className="text-lg font-bold">FAMÍLIA RURAL OLIVEIRA</h3>
-              <p className="text-gray-600 mt-2">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
             </div>
 
             <div className="mt-8 space-y-4">
               <div>
                 <h4 className="text-green-700 font-bold">Produção</h4>
-                <p className="text-gray-600">Lorem: Ipsum is simply</p>
-                <p className="text-gray-600">Lorem: Ipsum is simply</p>
-                <p className="text-gray-600">Lorem: Ipsum is simply</p>
+                <p className="text-gray-600">
+                  Ciclo: {currentPlano?.clicloProducao}
+                </p>
+                <p className="text-gray-600">
+                  Usa Fertilizantes:{" "}
+                  {currentPlano.usaFertilizantes ? "Sim" : "Não"}
+                </p>
+                <p className="text-gray-600">
+                  Usa Pesticidas: {currentPlano?.usaPesticidas ? "Sim" : "Não"}
+                </p>
               </div>
               <div>
                 <h4 className="text-green-700 font-bold">Mudas</h4>
-                <p className="text-gray-600">
-                  Mudas florestais: Lorem Ipsum is simply dummy text.
+                <p className="text-gray-600 max-w-96 font-normal">
+                  <strong className="font-bold">Mudas florestais:</strong>{" "}
+                  {currentPlano?.especiesMudasFlorestais.join(", ")}
                 </p>
-                <p className="text-gray-600">
-                  Mudas frutíferas: Lorem Ipsum is simply dummy text.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-green-700 font-bold">Performance</h4>
-                <p className="text-gray-600">
-                  Lorem Ipsum is simply dummy text.
+                <p className="text-gray-600 max-w-96 font-normal">
+                  <strong className="font-bold">Mudas frutíferas:</strong>{" "}
+                  {currentPlano?.especiesMudasFrutiferas.join(", ")}
                 </p>
               </div>
             </div>
