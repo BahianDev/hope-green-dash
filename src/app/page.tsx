@@ -3,6 +3,7 @@ import GoogleMapComponent from "@/components/GoogleMapComponent";
 import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 export default function Home() {
@@ -33,9 +34,13 @@ export default function Home() {
             <div className="w-60 h-[1px] bg-green-base" />
           </div>
           <div>
-            <button className="bg-green-base text-2xl w-52 text-white px-10 py-2 rounded-lg font-bold">
+            <Link
+              href="https://sb1-268fhw.vercel.app/"
+              target="_blank"
+              className="bg-green-base text-2xl w-52 text-white px-10 py-2 rounded-lg font-bold"
+            >
               NFT Market
-            </button>
+            </Link>
           </div>
         </header>
 
