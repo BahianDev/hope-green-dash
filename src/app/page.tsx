@@ -13,7 +13,7 @@ export default function Home() {
   const { data: planos } = useQuery({
     queryKey: ["files-list"],
     queryFn: (): Promise<any> =>
-      api.get(`plano-produtivo`).then((response) => response.data),
+      api.get(`plano-produtivo`).then((response) => response.data.reverse()),
     refetchOnWindowFocus: false,
     initialData: [],
   });
@@ -104,6 +104,7 @@ export default function Home() {
                     </div>
                   </div>
                   <button
+                  disabled={plano.user.name !== 'Charlinha Reis dos Santos'}
                     onClick={() => {
                       if (modal.current) {
                         setCurrentPlano(plano);
