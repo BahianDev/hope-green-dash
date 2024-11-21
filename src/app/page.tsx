@@ -245,7 +245,7 @@ export default function Home() {
                 </p>
                 <p className="text-gray-600">
                   Usa Fertilizantes:{" "}
-                  {currentPlano.usaFertilizantes ? "Sim" : "Não"}
+                  {currentPlano?.usaFertilizantes ? "Sim" : "Não"}
                 </p>
                 <p className="text-gray-600">
                   Usa Pesticidas: {currentPlano?.usaPesticidas ? "Sim" : "Não"}
