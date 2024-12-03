@@ -104,7 +104,7 @@ export default function Home() {
                     </div>
                   </div>
                   <button
-                  disabled={plano.user.name !== 'Charlinha Reis dos Santos'}
+                    disabled={plano.user.name !== "Charlinha Reis dos Santos"}
                     onClick={() => {
                       if (modal.current) {
                         setCurrentPlano(plano);
@@ -157,107 +157,117 @@ export default function Home() {
         </footer>
       </div>
       <dialog id="my_modal_2" className="modal mt-24" ref={modal}>
-        <div className="modal-box bg-custom-gray border-green-base border-2 max-w-7xl h-full flex">
-          <div className="bg-green-base text-white w-1/3 p-6 flex flex-col justify-between">
-            <div>
-              <Image
-                src="/avatar.png"
-                width={100}
-                height={100}
-                alt="profile"
-                className="rounded-full"
-              />
-              <h2 className="text-2xl font-bold uppercase">
-                {currentPlano?.user.name}
-              </h2>
-              <p className="mt-4 text-sm max-w-40">{currentPlano?.endereco}</p>
-              <div className="mt-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <span>📅</span> January, 2025
+        <div className="modal-box bg-custom-gray border-green-base border-2 max-w-7xl h-full flex gap-2">
+          <div className="w-1/3">
+            <div className="bg-green-base text-white  p-6 flex flex-col justify-between rounded-lg">
+              <div>
+                <div className="flex gap-2">
+                  <Image
+                    src="/mock/image.png"
+                    width={50}
+                    height={50}
+                    alt="profile"
+                    className="rounded-full w-full border-2 border-white"
+                  />
+                  <div>
+                    <h2 className="text-2xl font-bold uppercase">
+                      {currentPlano?.user.name}
+                    </h2>
+                    <p className="mt-4 text-sm">{currentPlano?.endereco}</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span>✉️</span> {currentPlano?.user.email}
-                </div>
-                <div className="flex items-center gap-2">
-                  <span>📞</span> +55 92 0000-0000
+                <div className="h-[4px] w-full bg-white mt-5" />
+
+                <div className="mt-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span>📅</span> January, 2025
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span>✉️</span> {currentPlano?.user.email}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span>📞</span> +55 92 0000-0000
+                  </div>
                 </div>
               </div>
             </div>
-
             <div className="flex items-center justify-between mt-6">
               <button className="text-white">&lt;</button>
               <div className="flex gap-2">
                 <img
-                  src="https://via.placeholder.com/50"
+                  src="/mock/c1.jpg"
                   alt="Foto"
-                  className="rounded-lg w-24 h-24 object-cover"
+                  className="rounded-lg w-40 h-52 object-cover"
                 />
                 <img
-                  src="https://via.placeholder.com/50"
+                  src="/mock/c2.jpg"
                   alt="Foto"
-                  className="rounded-lg w-24 h-24 object-cover"
+                  className="rounded-lg w-40 h-52 object-cover"
                 />
               </div>
               <button className="text-white">&gt;</button>
             </div>
           </div>
+          <div className="w-1/3">
+            <div className="flex flex-col text-black">
+              <span className="font-bold text-xl">COMBOS ÁREAS:</span>
+              <span className="font-normal text-lg">Culturas Anuais</span>
+              <span className="font-normal text-lg">Culturas Industriais</span>
+              <span className="font-normal text-lg">Reserva Legal</span>
+            </div>
 
-          <div className="w-2/3 bg-gray-100 p-6 relative">
+            <div className="flex flex-col text-black mt-5">
+              <span className="font-bold text-xl">TOTAL HECTARES:</span>
+              <p className="text-xl text-black font-normal">
+                {currentPlano?.hectare}
+              </p>
+            </div>
+            <div className="flex flex-col text-black mt-5">
+              <span className="font-bold text-xl">MUDAS FLORESTAIS:</span>
+              <p className="text-xl text-black font-normal">
+                {currentPlano?.quantMudasFlorestais}
+              </p>
+            </div>
+            <div className="flex flex-col text-black mt-5">
+              <span className="font-bold text-xl">MUDAS FLORESTAIS:</span>
+              <p className="text-xl text-black font-normal">
+                {currentPlano?.quantMudasFrutiferas}
+              </p>
+            </div>
+            <div className="flex flex-col text-black mt-5">
+              <span className="font-bold text-xl">FAMÍLIA DOS SANTOS:</span>
+              <p className="text-base text-black font-normal">
+                A propriedade pertence à família de Charlinha Reis dos Santos
+                desde 04 de Maio de 2015. Além de produzir para o consumo
+                próprio, a família gera seu sustento a partir de árvores
+                frutíferas, vendendo as safras para o mercado local. A produção
+                é agroecológica, sem o uso de agrotóxicos, e tem beneficiado o
+                município de Iranduba com produtos sustentáveis, promovendo a
+                conservação ambiental e a agricultura
+              </p>
+            </div>
+          </div>
+
+          <div className="w-1/3 bg-gray-100 p-6 relative">
             <form method="dialog">
               <button className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
                 ✖
               </button>
             </form>
 
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <p className="text-xl text-black font-bold">
-                  {currentPlano?.hectare}
-                </p>
-                <p className="text-gray-500">Hectares</p>
-              </div>
-              <div>
-                <p className="text-xl text-black font-bold">
-                  {currentPlano?.espacamento} m²
-                </p>
-                <p className="text-gray-500">Espaçamento</p>
-              </div>
-              <div>
-                <p className="text-xl text-black font-bold">
-                  {currentPlano?.linhas}
-                </p>
-                <p className="text-gray-500">Linhas</p>
-              </div>
-              <div>
-                <p className="text-xl text-black font-bold">
-                  {currentPlano?.tipoDeArea}
-                </p>
-                <p className="text-gray-500">Tipo de Área</p>
-              </div>
-            </div>
-
-            <div className="mt-8 space-y-4">
-              <div>
-                <h4 className="text-green-700 font-bold">Produção</h4>
-                <p className="text-gray-600">
-                  Ciclo: {currentPlano?.clicloProducao}
-                </p>
-                <p className="text-gray-600">
-                  Usa Fertilizantes:{" "}
-                  {currentPlano?.usaFertilizantes ? "Sim" : "Não"}
-                </p>
-                <p className="text-gray-600">
-                  Usa Pesticidas: {currentPlano?.usaPesticidas ? "Sim" : "Não"}
-                </p>
-              </div>
-              <div>
-                <h4 className="text-green-700 font-bold">Mudas</h4>
-                <p className="text-gray-600 max-w-96 font-normal">
-                  <strong className="font-bold">Mudas florestais:</strong>{" "}
+            <div className="mt-2 space-y-4">
+              <div className="p-2">
+                <div className="bg-green-base p-2 rounded-2xl">
+                  <span className="font-bold text-xl">Mudas Florestais</span>
+                </div>
+                <p className="text-gray-600 text-xl max-w-96 font-normal mt-2">
                   {currentPlano?.especiesMudasFlorestais.join(", ")}
                 </p>
-                <p className="text-gray-600 max-w-96 font-normal">
-                  <strong className="font-bold">Mudas frutíferas:</strong>{" "}
+
+                <div className="bg-green-base p-2 rounded-2xl">
+                  <span className="font-bold text-xl">Mudas frutíferass</span>
+                </div>
+                <p className="text-gray-600 text-xl max-w-96 font-normal mt-2">
                   {currentPlano?.especiesMudasFrutiferas.join(", ")}
                 </p>
               </div>
