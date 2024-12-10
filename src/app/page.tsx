@@ -26,11 +26,13 @@ export default function Home() {
         {/* Cabeçalho */}
         <header className="flex justify-between items-start p-2 rounded-lg mb-6">
           <div className="flex items-center">
-            <Image src="/logo.png" alt="Osten Green" width={250} height={50} />
+            <Image src="/logo.png" alt="Hope Green" width={250} height={50} />
           </div>
           <div className="w-full px-5 flex flex-col items-end gap-3">
             <div className="w-full h-[1px] bg-green-base" />
-            <span className="text-davys-gray text-base">Sobre a Osten</span>
+            <span className="text-davys-gray text-base">
+              Sobre a Hope Green
+            </span>
             <div className="w-60 h-[1px] bg-green-base" />
           </div>
           <div>
@@ -136,7 +138,17 @@ export default function Home() {
               Produtores <br />
               rurais
             </p>
-            <p className="text-4xl font-bold mt-10 mr-2">{planos.length}</p>
+            <p className="text-4xl font-bold mt-10 mr-2">
+              {
+                planos.reduce((acc: any, plano: any) => {
+                  // Supondo que cada plano tenha uma propriedade "produtor" com o nome do produtor
+                  if (!acc.includes(plano.user.name)) {
+                    acc.push(plano.user.name);
+                  }
+                  return acc;
+                }, []).length
+              }
+            </p>
           </div>
           <div className="flex h-28 justify-between bg-light-gray text-black p-4 rounded-tr-full rounded-br-full rounded-bl-full w-52">
             <p className="text-base">Total de árvores florestais</p>
@@ -167,7 +179,7 @@ export default function Home() {
                     width={50}
                     height={50}
                     alt="profile"
-                    className="rounded-full w-full border-2 border-white"
+                    className="rounded-full w-28 h-28 border-2 border-white"
                   />
                   <div>
                     <h2 className="text-2xl font-bold uppercase">
@@ -229,7 +241,7 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col text-black mt-5">
-              <span className="font-bold text-xl">MUDAS FLORESTAIS:</span>
+              <span className="font-bold text-xl">MUDAS FRUTIFERAS:</span>
               <p className="text-xl text-black font-normal">
                 {currentPlano?.quantMudasFrutiferas}
               </p>
@@ -265,7 +277,7 @@ export default function Home() {
                 </p>
 
                 <div className="bg-green-base p-2 rounded-2xl">
-                  <span className="font-bold text-xl">Mudas frutíferass</span>
+                  <span className="font-bold text-xl">Mudas frutíferas</span>
                 </div>
                 <p className="text-gray-600 text-xl max-w-96 font-normal mt-2">
                   {currentPlano?.especiesMudasFrutiferas.join(", ")}
