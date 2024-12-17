@@ -10,7 +10,6 @@ import Loader from "./Loader";
 
 const containerStyle = {
   width: "100%",
-  height: "500px",
   borderRadius: "20px",
 };
 
@@ -24,14 +23,14 @@ interface IGoogleMapComponent {
     lat: string;
     lng: string;
   }[];
+  zoom: number;
+  height: string
 }
 
-const GoogleMapComponent = ({ markers }: IGoogleMapComponent) => {
+const GoogleMapComponent = ({ markers, zoom, height }: IGoogleMapComponent) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
-
-  const center = { lng: "-61.0098647", lat: "-5.5871199" };
 
   if (!isLoaded) return <div>Loading....</div>;
   return (
@@ -44,19 +43,19 @@ const GoogleMapComponent = ({ markers }: IGoogleMapComponent) => {
         streetViewControl: false,
         mapTypeControl: false,
       }}
-      mapContainerStyle={containerStyle}
+      mapContainerStyle={{...containerStyle, height}}
       center={{
-        lat: Number(center.lat),
-        lng: Number(center.lng),
+        lat: Number(markers[0].lat),
+        lng: Number(markers[0].lng),
       }}
-      zoom={6}
+      zoom={zoom}
     >
       {markers.map((marker, key) => (
         <Marker
           key={key}
           icon={{
             url: "/marker-icon.png",
-      scale: 22
+            scale: 22,
           }}
           position={{
             lat: Number(marker.lat),

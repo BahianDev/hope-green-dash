@@ -50,14 +50,19 @@ export default function Home() {
           <div className="col-span-2 rounded-lg  p-4">
             <div className="relative w-full h-96">
               {/* Aqui você pode integrar o mapa usando alguma biblioteca como Leaflet ou Google Maps */}
-              <GoogleMapComponent
-                markers={planos.map((plano: any) => {
-                  return {
-                    lat: plano.lat,
-                    lng: plano.lng,
-                  };
-                })}
-              />
+
+              {planos.length && (
+                <GoogleMapComponent
+                  height="500px"
+                  zoom={6}
+                  markers={planos.map((plano: any) => {
+                    return {
+                      lat: plano.lat,
+                      lng: plano.lng,
+                    };
+                  })}
+                />
+              )}
             </div>
           </div>
 
