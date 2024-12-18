@@ -66,7 +66,7 @@ const NftModal = ({ currentNft, modal }: INftModal) => {
               {currentNft && currentNft?.latitude && currentNft.latitude && (
                 <GoogleMapComponent
                   height="300px"
-                  zoom={60}
+                  zoom={15}
                   markers={[
                     {
                       lat: formatCoordinates(currentNft?.latitude as string),
