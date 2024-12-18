@@ -18,7 +18,7 @@ const AssetCard = ({ nft, modal, setCurrentNft }: IAssetCard) => {
           <p className="font-semibold text-davys-gray uppercase">{name}</p>
           <div className="text-base text-davys-gray font-normal flex gap-2 mt-2">
             <Image src="/marker.png" width={20} height={20} alt="profile" />
-            <p> Distrito Açuanópolis - AM</p>
+            <p>Iranduba - AM</p>
           </div>
           <div className="text-base text-davys-gray font-normal flex gap-2 mt-2">
             <Image src="/hectare.png" width={20} height={20} alt="profile" />

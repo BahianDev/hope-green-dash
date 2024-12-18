@@ -3,6 +3,8 @@ import Image from "next/image";
 import { RefObject } from "react";
 import GoogleMapComponent from "../GoogleMapComponent";
 import { formatCoordinates } from "@/utils/formatCoordinates";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import Link from "next/link";
 
 interface INftModal {
   currentNft: INft | undefined;
@@ -39,6 +41,18 @@ const NftModal = ({ currentNft, modal }: INftModal) => {
                 <span className="text-black text-sm font-bold">Plantio</span>
                 <span className="text-black text-sm">{currentNft?.date}</span>
               </div>
+
+              <Link
+                target="_blank"
+                href={`https://hope-green.s3.us-east-2.amazonaws.com/metadata/${currentNft?.tokenId}.json`}
+              >
+                <Image
+                  src={"/external-link-alt.png"}
+                  width={20}
+                  height={20}
+                  alt="external"
+                />
+              </Link>
             </div>
             <div className="flex gap-5">
               <div className="flex flex-col max-w-48">

@@ -1,4 +1,5 @@
 export interface INft {
+  tokenId: number;
   producer: string;
   address: string;
   date: string;

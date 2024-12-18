@@ -89,7 +89,7 @@ export default function Home() {
                           height={20}
                           alt="profile"
                         />
-                        <p> Distrito Açuanópolis - AM</p>
+                        <p>Iranduba - AM</p>
                       </div>
                       <div className="text-base text-davys-gray font-normal flex gap-2 mt-2">
                         <Image

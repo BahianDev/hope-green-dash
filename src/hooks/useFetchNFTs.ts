@@ -46,7 +46,14 @@ export const useFetchNFTs = ({ contractAddress }: UseFetchNFTsProps) => {
 
       try {
         const results = await Promise.all(promises);
-        setNfts(results.map((res) => metadata[Number(res)]));
+        setNfts(
+          results.map((res) => {
+            return {
+              ...metadata[Number(res)],
+              tokenId: Number(res),
+            };
+          })
+        );
       } catch (error) {
         console.error("Error fetching token IDs:", error);
       } finally {
@@ -56,6 +63,8 @@ export const useFetchNFTs = ({ contractAddress }: UseFetchNFTsProps) => {
 
     fetchTokenIds();
   }, [balance, address, contractAddress]);
+
+  console.log(nfts);
 
   return {
     nfts,
