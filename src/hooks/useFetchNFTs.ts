@@ -40,7 +40,7 @@ export const useFetchNFTs = ({ contractAddress }: UseFetchNFTsProps) => {
 
       setIsLoading(true);
       const promises = [];
-      for (let i = 0; i < Number(balance); i++) {
+      for (let i = 0; i < 10; i++) {
         promises.push(fetchTokenByIndex(address, i));
       }
 
