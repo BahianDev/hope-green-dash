@@ -11,4 +11,5 @@ export interface INft {
   latitude: string;
   longitude: string;
   image: string;
+  tree_image: string;
 }

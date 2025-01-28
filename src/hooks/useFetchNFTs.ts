@@ -12,6 +12,7 @@ interface UseFetchNFTsProps {
 
 export const useFetchNFTs = ({ contractAddress }: UseFetchNFTsProps) => {
   const { address } = useAccount();
+
   const [nfts, setNfts] = useState<INft[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { data: balance, isLoading: balanceLoading } = useReadContract({
@@ -40,7 +41,8 @@ export const useFetchNFTs = ({ contractAddress }: UseFetchNFTsProps) => {
 
       setIsLoading(true);
       const promises = [];
-      for (let i = 0; i < Number(balance); i++) {
+      for (let i = 1; i < Number(balance); i++) {
+        console.log(i)
         promises.push(fetchTokenByIndex(address, i));
       }
 

@@ -25,15 +25,17 @@ const AssetCard = ({ nft, modal, setCurrentNft }: IAssetCard) => {
             <p>Tipo: {type}</p>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-3">
-          <Image
-            className="rounded-full w-14 h-14"
-            src={image}
-            width={50}
-            height={50}
-            alt="profile"
-          />
-        </div>
+        {image && (
+          <div className="flex flex-col items-center gap-3">
+            <Image
+              className="rounded-full w-14 h-14"
+              src={image}
+              width={50}
+              height={50}
+              alt="profile"
+            />
+          </div>
+        )}
       </div>
       <div className="flex gap-2 mt-2 w-full justify-end">
         <button

@@ -18,7 +18,7 @@ const NftModal = ({ currentNft, modal }: INftModal) => {
         <div className="modal-box bg-custom-gray border-green-base border-2 max-w-5xl flex gap-5">
           <div>
             <Image
-              src={currentNft.image as string}
+              src={currentNft.tree_image as string}
               width={384}
               height={300}
               alt="nft"
@@ -93,7 +93,7 @@ const NftModal = ({ currentNft, modal }: INftModal) => {
             <div className="flex flex-col max-w-48">
               <span className="text-black text-sm font-bold">Contrato</span>
               <span className="text-black text-sm">
-                0x750ab3842345a32d258379543665b73A53304479
+                0xAEbC39BC35aF95BF25C1254ea2200a1a5ebCc658
               </span>
             </div>
           </div>

@@ -9,7 +9,7 @@ import { INft } from "@/types";
 import { useFetchNFTs } from "@/hooks/useFetchNFTs";
 
 export default function Nfts() {
-  const contractAddress = "0x750ab3842345a32d258379543665b73A53304479" as const;
+  const contractAddress = "0xAEbC39BC35aF95BF25C1254ea2200a1a5ebCc658" as const;
 
   const modal = useRef<HTMLDialogElement>(null);
   const [currentNft, setCurrentNft] = useState<INft>();
