@@ -29,7 +29,8 @@ interface IGoogleMapComponent {
 
 const GoogleMapComponent = ({ markers, zoom, height }: IGoogleMapComponent) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+    googleMapsApiKey: 'AIzaSyBliBpuDoKPH6uL_11dFwzaDVZkgmksGLo' as string,
+
   });
 
   if (!isLoaded) return <div>Loading....</div>;
