@@ -28,20 +28,20 @@ export default function Home() {
     initialData: [],
   });
 
-  if (!planos || !produtores) return <></>;
+  if (!planos || !produtores) return null;
+
+  function openModal(produtor: any) {
+    setCurrentProdutor(produtor);
+    modal.current?.showModal();
+  }
 
   return (
     <>
-      <div className="min-h-screen bg-white p-6">
+      <div className="min-h-screen bg-white p-4 md:p-6">
         {/* Cabeçalho */}
-        <header className="flex justify-between items-start p-2 rounded-lg mb-6">
-          <div className="flex items-center">
-            <Image src="/logo.png" alt="Hope Green" width={250} height={50} />
-          </div>
-          <div className="w-full px-5 flex flex-col items-end gap-3">
-            <div className="w-full h-[1px] bg-green-base" />
-            <span className="text-davys-gray text-base">Sobre a Hope Green</span>
-            <div className="w-60 h-[1px] bg-green-base" />
+        <header className="flex flex-col md:flex-row justify-between items-center p-4 rounded-lg mb-6 shadow-md">
+          <div className="flex items-center mb-4 md:mb-0">
+            <img src="/logo.png" alt="Hope Green" className="w-36 h-14" />
           </div>
           <div>
             <Link href="https://sb1-268fhw.vercel.app/" target="_blank">
@@ -53,13 +53,13 @@ export default function Home() {
         </header>
 
         {/* Corpo principal */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Mapa (usando os planos) */}
-          <div className="col-span-2 rounded-lg p-4">
-            <div className="relative w-full h-96">
-              {planos.length && (
+          <div className="col-span-1 md:col-span-2 rounded-lg p-4 shadow-md">
+            <div className="relative w-full h-72 md:h-[29rem]">
+              {planos.length > 0 && (
                 <GoogleMapComponent
-                  height="500px"
+                  height="100%"
                   zoom={6}
                   markers={planos
                     .filter((plano: any) => plano.lat && plano.lng)
@@ -73,7 +73,7 @@ export default function Home() {
           </div>
 
           {/* Lista de produtores */}
-          <aside className="bg-light-gray rounded-lg p-4 h-full max-h-[500px] mt-4 overflow-scroll">
+          <aside className="bg-gray-100 rounded-lg p-4 h-full max-h-[500px] overflow-y-auto shadow-md">
             <h2 className="text-lg font-bold mb-4 text-davys-gray">
               Conheça os produtores
             </h2>
@@ -81,49 +81,49 @@ export default function Home() {
               {produtores.map((produtor: any, index: number) => (
                 <div
                   key={index}
-                  className="bg-white rounded-lg p-4 flex flex-col items-center justify-between"
+                  className="bg-white rounded-lg p-4 flex flex-col items-center justify-between shadow-sm"
                 >
-                  <div className="flex w-full justify-between">
-                    <div>
-                      <p className="font-semibold text-davys-gray uppercase">
+                  <div className="flex w-full justify-between items-center">
+                    <div className="flex-1">
+                      <p className="font-semibold text-davys-gray uppercase text-sm">
                         {produtor.nome}
                       </p>
-                      <div className="text-base text-davys-gray font-normal flex gap-2 mt-2">
+                      <div className="flex items-center gap-2 mt-2">
                         <Image
                           src="/marker.png"
                           width={20}
                           height={20}
-                          className="w-5 h-5"
                           alt="Endereço"
                         />
-                        <p className="max-w-64">{produtor.endereco}</p>
+                        <p className="text-xs text-davys-gray">
+                          {produtor.endereco}
+                        </p>
                       </div>
-                      <div className="text-base text-davys-gray font-normal flex gap-2 mt-2">
+                      <div className="flex items-center gap-2 mt-2">
                         <Image
                           src="/hectare.png"
                           width={20}
                           height={20}
                           alt="Hectares"
                         />
-                        <p>{produtor.hectare} Hectares</p>
+                        <p className="text-xs text-davys-gray">
+                          {produtor.hectare} Hectares
+                        </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center gap-3">
-                      <img
-                        src={produtor.pfp}           
+                    <div className="flex-shrink-0 ml-2">
+                      <Image
+                        src={produtor.pfp}
+                        width={50}
+                        height={50}
                         alt="Profile"
-                        className="rounded-full w-20 h-20"
+                        className="rounded-full"
                       />
                     </div>
                   </div>
                   <button
-                    onClick={() => {
-                      if (modal.current) {
-                        setCurrentProdutor(produtor);
-                        modal.current.showModal();
-                      }
-                    }}
-                    className="bg-green-base text-white px-2 py-1 rounded text-xs font-normal self-end"
+                    onClick={() => openModal(produtor)}
+                    className="mt-3 bg-green-base font-bold text-sm text-white px-2 py-1 w-52 rounded-lg self-end"
                   >
                     Informações do produtor
                   </button>
@@ -134,41 +134,38 @@ export default function Home() {
         </div>
 
         {/* Estatísticas */}
-        <footer className="bg-white rounded-lg mt-6 p-4 flex items-center gap-10">
-          <div className="flex h-28 justify-between bg-green-base text-white p-4 rounded-tr-full rounded-br-full rounded-bl-full w-52">
-            <p className="text-base">
-              Total de <br />
-              hectares <br />
-              plantados
+        <footer className="bg-white rounded-lg mt-6 p-4 flex flex-col md:flex-row items-center gap-4 md:gap-10 shadow-md">
+          <div className="flex flex-col items-center justify-between bg-green-base text-white p-4 rounded-full w-full md:w-52">
+            <p className="text-center text-base">
+              Total de  hectares <br /> plantados
             </p>
-            <p className="text-6xl font-bold mt-6">
+            <p className="text-4xl font-bold mt-2">
               {produtores.reduce(
                 (acc: number, prod: any) => acc + prod.hectare,
                 0
               )}
             </p>
           </div>
-          <div className="flex h-28 justify-between bg-light-gray text-black p-4 rounded-tr-full rounded-br-full rounded-bl-full w-52">
-            <p className="text-base">
-              Produtores <br />
-              rurais
+          <div className="flex flex-col items-center justify-between bg-gray-200 text-black p-4 rounded-full w-full md:w-52">
+            <p className="text-center text-base">
+              Produtores <br /> rurais
             </p>
-            <p className="text-4xl font-bold mt-10 mr-2">
+            <p className="text-3xl font-bold mt-2">
               {Array.from(new Set(produtores.map((p: any) => p.nome))).length}
             </p>
           </div>
-          <div className="flex h-28 justify-between bg-light-gray text-black p-4 rounded-tr-full rounded-br-full rounded-bl-full w-52">
-            <p className="text-base">Total de árvores florestais</p>
-            <p className="text-4xl font-bold mt-10 mr-2">
+          <div className="flex flex-col items-center justify-between bg-gray-200 text-black p-4 rounded-full w-full md:w-52">
+            <p className="text-center text-base">Total de árvores florestais</p>
+            <p className="text-3xl font-bold mt-2">
               {produtores.reduce(
                 (acc: number, prod: any) => acc + prod.quantMudasFlorestais,
                 0
               )}
             </p>
           </div>
-          <div className="flex h-28 justify-between bg-light-gray text-black p-4 rounded-tr-full rounded-br-full rounded-bl-full w-52">
-            <p className="text-base">Total de árvores produtivas</p>
-            <p className="text-4xl font-bold mt-10 mr-2">
+          <div className="flex flex-col items-center justify-between bg-gray-200 text-black p-4 rounded-full w-full md:w-52">
+            <p className="text-center text-base">Total de árvores produtivas</p>
+            <p className="text-3xl font-bold mt-2">
               {produtores.reduce(
                 (acc: number, prod: any) => acc + prod.quantMudasFrutiferas,
                 0
@@ -178,132 +175,154 @@ export default function Home() {
         </footer>
       </div>
 
-      {/* Modal com informações do produtor */}
-      <dialog id="my_modal_2" className="modal mt-24" ref={modal}>
-        <div className="modal-box bg-custom-gray border-green-base border-2 max-w-7xl h-full flex gap-2">
-          <div className="w-1/3">
-            <div className="bg-green-base text-white p-6 flex flex-col justify-between rounded-lg">
-              <div>
+      {/* Modal com informações do produtor (estrutura DaisyUI recomendada) */}
+      <dialog id="my_modal_2" className="modal" ref={modal}>
+        {/* 
+          Usamos um <form method="dialog"> envolvendo todo o conteúdo 
+          para que o botão "Fechar" feche o modal sem complicações.
+        */}
+        <form
+          method="dialog"
+          className="modal-box w-full max-w-5xl bg-gray-200 border-2 border-green-base rounded-lg p-4 max-h-[90vh] overflow-y-auto"
+        >
+          {/* Conteúdo do modal em si */}
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Coluna da esquerda */}
+            <div className="w-full md:w-1/3">
+              <div className="bg-green-base text-white p-6 flex flex-col justify-between rounded-lg">
                 <div className="flex gap-2">
                   <Image
                     src={currentProdutor?.pfp || "/mock/image.png"}
                     width={50}
                     height={50}
                     alt="profile"
-                    className="rounded-full w-28 h-28 border-2 border-white"
+                    className="rounded-full w-24 h-24 border-2 border-white"
                   />
                   <div>
-                    <h2 className="text-2xl font-bold uppercase">
+                    <h2 className="text-xl font-bold uppercase">
                       {currentProdutor?.nome}
                     </h2>
-                    <p className="mt-4 text-sm">
+                    <p className="mt-2 text-sm">
                       {currentProdutor?.endereco}
                     </p>
                   </div>
                 </div>
-                <div className="h-[4px] w-full bg-white mt-5" />
-
-                <div className="mt-6">
-                  <div className="flex items-center gap-2 mb-2">
+                <div className="h-[4px] w-full bg-white my-4" />
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm">
                     <span>📅</span> {currentProdutor?.ano}
                   </div>
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 text-sm">
                     <span>✉️</span> {currentProdutor?.email}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 text-sm">
                     <span>📞</span> {currentProdutor?.telefone}
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex items-center justify-between mt-6">
-              <button className="text-white">&lt;</button>
-              <div className="flex gap-2">
-                {currentProdutor?.images?.map((img: string, idx: number) => (
-                  <img
-                    key={idx}
-                    src={img}
-                    alt="Foto"
-                    className="rounded-lg w-40 h-52 object-cover"
-                  />
-                ))}
+              {/* Imagens extras */}
+              <div className="flex items-center justify-between mt-4">
+                <button
+                  type="button"
+                  className="text-green-base text-xl px-2"
+                  // Caso queira adicionar funcionalidade de "voltar foto"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  &lt;
+                </button>
+                <div className="flex gap-2 overflow-x-auto">
+                  {currentProdutor?.images?.map((img: string, idx: number) => (
+                    <img
+                      key={idx}
+                      src={img}
+                      alt="Foto"
+                      className="rounded-lg w-32 h-40 object-cover"
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  className="text-green-base text-xl px-2"
+                  // Caso queira adicionar funcionalidade de "próxima foto"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  &gt;
+                </button>
               </div>
-              <button className="text-white">&gt;</button>
-            </div>
-          </div>
-
-          <div className="w-1/3">
-            <div className="flex flex-col text-black">
-              <span className="font-bold text-xl">COMBOS ÁREAS:</span>
-              <span className="font-normal text-lg">
-                {currentProdutor?.areas ? currentProdutor.areas.join(", ") : ""}
-              </span>
             </div>
 
-            <div className="flex flex-col text-black mt-5">
-              <span className="font-bold text-xl">TOTAL HECTARES:</span>
-              <p className="text-xl text-black font-normal">
-                {currentProdutor?.hectare}
-              </p>
-            </div>
-            <div className="flex flex-col text-black mt-5">
-              <span className="font-bold text-xl">MUDAS FLORESTAIS:</span>
-              <p className="text-xl text-black font-normal">
-                {currentProdutor?.quantMudasFlorestais}
-              </p>
-            </div>
-            <div className="flex flex-col text-black mt-5">
-              <span className="font-bold text-xl">MUDAS FRUTIFERAS:</span>
-              <p className="text-xl text-black font-normal">
-                {currentProdutor?.quantMudasFrutiferas}
-              </p>
-            </div>
-            <div className="flex flex-col text-black mt-5">
-              <span className="font-bold text-xl">
-                {currentProdutor?.tituloDescricao}
-              </span>
-              <p className="text-base text-black font-normal">
-                {currentProdutor?.descricao}
-              </p>
-            </div>
-          </div>
-
-          <div className="w-1/3 bg-gray-100 p-6 relative">
-            <form method="dialog">
-              <button className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                ✖
-              </button>
-            </form>
-
-            <div className="mt-2 space-y-4">
-              <div className="p-2">
-                <div className="bg-green-base p-2 rounded-2xl">
-                  <span className="font-bold text-xl">Mudas Florestais</span>
-                </div>
-                <p className="text-gray-600 text-xl max-w-96 font-normal mt-2">
-                  {currentProdutor?.especiesMudasFlorestais
-                    ? currentProdutor.especiesMudasFlorestais.join(", ")
+            {/* Coluna do meio */}
+            <div className="w-full md:w-1/3">
+              <div className="flex flex-col text-black">
+                <span className="font-bold text-xl">COMBOS ÁREAS:</span>
+                <span className="font-normal text-lg">
+                  {currentProdutor?.areas
+                    ? currentProdutor.areas.join(", ")
                     : ""}
+                </span>
+              </div>
+              <div className="flex flex-col text-black mt-5">
+                <span className="font-bold text-xl">TOTAL HECTARES:</span>
+                <p className="text-xl font-normal">
+                  {currentProdutor?.hectare}
                 </p>
-
-                <div className="bg-green-base p-2 rounded-2xl">
-                  <span className="font-bold text-xl">Mudas Frutíferas</span>
-                </div>
-                <p className="text-gray-600 text-xl max-w-96 font-normal mt-2">
-                  {currentProdutor?.especiesMudasFrutiferas
-                    ? currentProdutor.especiesMudasFrutiferas.join(", ")
-                    : ""}
+              </div>
+              <div className="flex flex-col text-black mt-5">
+                <span className="font-bold text-xl">MUDAS FLORESTAIS:</span>
+                <p className="text-xl font-normal">
+                  {currentProdutor?.quantMudasFlorestais}
+                </p>
+              </div>
+              <div className="flex flex-col text-black mt-5">
+                <span className="font-bold text-xl">MUDAS FRUTIFERAS:</span>
+                <p className="text-xl font-normal">
+                  {currentProdutor?.quantMudasFrutiferas}
+                </p>
+              </div>
+              <div className="flex flex-col text-black mt-5">
+                <span className="font-bold text-xl">
+                  {currentProdutor?.tituloDescricao}
+                </span>
+                <p className="text-base font-normal">
+                  {currentProdutor?.descricao}
                 </p>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div className="modal-action">
-          <form method="dialog">
-            <button className="btn">Close</button>
-          </form>
-        </div>
+            {/* Coluna da direita */}
+            <div className="w-full md:w-1/3 bg-gray-100 p-4 relative rounded">
+              <div className="space-y-4">
+                <div>
+                  <div className="bg-green-base p-2 rounded-2xl">
+                    <span className="font-bold text-xl">Mudas Florestais</span>
+                  </div>
+                  <p className="text-gray-700 text-base mt-2">
+                    {currentProdutor?.especiesMudasFlorestais
+                      ? currentProdutor.especiesMudasFlorestais.join(", ")
+                      : ""}
+                  </p>
+                </div>
+                <div>
+                  <div className="bg-green-base p-2 rounded-2xl mt-4">
+                    <span className="font-bold text-xl">Mudas Frutíferas</span>
+                  </div>
+                  <p className="text-gray-700 text-base mt-2">
+                    {currentProdutor?.especiesMudasFrutiferas
+                      ? currentProdutor.especiesMudasFrutiferas.join(", ")
+                      : ""}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Área de ação (botão fechar) */}
+          <div className="modal-action mt-4">
+            <button className="btn bg-green-base text-white px-4 py-2 rounded">
+              Fechar
+            </button>
+          </div>
+        </form>
       </dialog>
     </>
   );
