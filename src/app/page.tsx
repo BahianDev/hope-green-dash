@@ -2,7 +2,6 @@
 import GoogleMapComponent from "@/components/GoogleMapComponent";
 import { api } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 
@@ -89,10 +88,9 @@ export default function Home() {
                         {produtor.nome}
                       </p>
                       <div className="flex items-center gap-2 mt-2">
-                        <Image
+                        <img
                           src="/marker.png"
-                          width={20}
-                          height={20}
+                          className="w-5 h-5"
                           alt="Endereço"
                         />
                         <p className="text-xs text-davys-gray">
@@ -100,10 +98,9 @@ export default function Home() {
                         </p>
                       </div>
                       <div className="flex items-center gap-2 mt-2">
-                        <Image
+                        <img
                           src="/hectare.png"
-                          width={20}
-                          height={20}
+                          className="w-5 h-5"
                           alt="Hectares"
                         />
                         <p className="text-xs text-davys-gray">
@@ -112,12 +109,10 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="flex-shrink-0 ml-2">
-                      <Image
+                      <img
                         src={produtor.pfp}
-                        width={50}
-                        height={50}
                         alt="Profile"
-                        className="rounded-full"
+                        className="rounded-full w-14 h-14"
                       />
                     </div>
                   </div>
@@ -137,7 +132,7 @@ export default function Home() {
         <footer className="bg-white rounded-lg mt-6 p-4 flex flex-col md:flex-row items-center gap-4 md:gap-10 shadow-md">
           <div className="flex flex-col items-center justify-between bg-green-base text-white p-4 rounded-full w-full md:w-52">
             <p className="text-center text-base">
-              Total de  hectares <br /> plantados
+              Total de hectares <br /> plantados
             </p>
             <p className="text-4xl font-bold mt-2">
               {produtores.reduce(
@@ -191,10 +186,8 @@ export default function Home() {
             <div className="w-full md:w-1/3">
               <div className="bg-green-base text-white p-6 flex flex-col justify-between rounded-lg">
                 <div className="flex gap-2">
-                  <Image
+                  <img
                     src={currentProdutor?.pfp || "/mock/image.png"}
-                    width={50}
-                    height={50}
                     alt="profile"
                     className="rounded-full w-24 h-24 border-2 border-white"
                   />
@@ -202,9 +195,7 @@ export default function Home() {
                     <h2 className="text-xl font-bold uppercase">
                       {currentProdutor?.nome}
                     </h2>
-                    <p className="mt-2 text-sm">
-                      {currentProdutor?.endereco}
-                    </p>
+                    <p className="mt-2 text-sm">{currentProdutor?.endereco}</p>
                   </div>
                 </div>
                 <div className="h-[4px] w-full bg-white my-4" />
