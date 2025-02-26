@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'hope-green.s3.us-east-2.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'osten-dash.s3.us-east-2.amazonaws.com',
+      },
     ],
   },
 };
