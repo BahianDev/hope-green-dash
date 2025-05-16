@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import ConnectWallet from "@/components/ConnectWallet";
@@ -10,21 +10,33 @@ export default function NftsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-white p-6">
-      <header className="flex justify-between items-start p-2 rounded-lg mb-6">
-        <div className="flex items-center">
-          <Image src="/logo.png" alt="Hope Green" width={250} height={50} />
+    <div className="min-h-screen bg-white px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <header className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 mb-6">
+        {/* Logo */}
+        <div className="w-full sm:w-auto flex justify-center sm:justify-start">
+          <Image
+            src="/logo.png"
+            alt="Hope Green"
+            width={200}
+            height={40}
+            className="w-40 h-auto sm:w-56 sm:h-auto"
+          />
         </div>
-        <div className="flex gap-2">
+
+        {/* Ações */}
+        <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-3">
           <Link href="https://sb1-268fhw.vercel.app/" target="_blank">
-            <button className="bg-green-base text-xl text-white px-10 py-2 rounded-lg font-bold">
+            <button className="bg-green-base text-white font-bold rounded-lg text-base sm:text-xl px-4 py-2 sm:px-10 sm:py-2 w-full sm:w-auto">
               NFT Market
             </button>
           </Link>
-          <ConnectWallet />
+          <div className="w-full sm:w-auto">
+            <ConnectWallet />
+          </div>
         </div>
       </header>
-      {children}
+
+      <main>{children}</main>
     </div>
   );
 }
