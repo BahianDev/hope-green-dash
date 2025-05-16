@@ -1,5 +1,6 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import {
+  metaMaskWallet,
   phantomWallet,
   rainbowWallet,
   walletConnectWallet,
@@ -14,7 +15,7 @@ export const config = getDefaultConfig({
   wallets: [
     {
       groupName: "Recommended",
-      wallets: [rainbowWallet, walletConnectWallet, phantomWallet],
+      wallets: [rainbowWallet, walletConnectWallet, phantomWallet, metaMaskWallet],
     },
   ],
 });
