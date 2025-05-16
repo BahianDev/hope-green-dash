@@ -11,7 +11,9 @@ interface UseFetchNFTsProps {
 }
 
 export const useFetchNFTs = ({ contractAddress }: UseFetchNFTsProps) => {
-  const { address } = useAccount();
+  // const { address } = useAccount();
+
+  let address = '0xb63cF834bB717c96Ad65501cccb0a073B4671130'
 
   const [nfts, setNfts] = useState<INft[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
