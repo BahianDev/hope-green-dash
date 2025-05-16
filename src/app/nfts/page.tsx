@@ -35,12 +35,12 @@ export default function Nfts() {
         )} */}
 
         {/* No NFTs */}
-        {!isLoading && isConnected && !nfts.length && (
+        {/* {!isLoading && isConnected && !nfts.length && (
           <div className="flex flex-col text-black w-full items-center justify-center py-20">
             <RxValueNone size={80} />
             <span className="mt-2 text-center">Você ainda não possui NFTs</span>
           </div>
-        )}
+        )} */}
 
         {/* NFT grid */}
         { nfts.length > 0 && (
