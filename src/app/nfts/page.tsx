@@ -22,7 +22,7 @@ export default function Nfts() {
 
 
         {/* NFT Grid */}
-        {!isLoading && isConnected && nfts.length > 0 && (
+        {nfts.length > 0 && (
           <section className="bg-light-gray rounded-2xl p-6 sm:p-8 lg:p-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-davys-gray mb-6 text-center sm:text-left">
               Conheça suas NFTs
