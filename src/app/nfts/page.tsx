@@ -20,19 +20,19 @@ export default function Nfts() {
     <>
       <div className="min-h-screen bg-white px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         {/* Loading state */}
-        {isConnected && isLoading && (
+        {/* {isConnected && isLoading && (
           <div className="flex flex-col text-black w-full items-center justify-center py-20">
             <span>Carregando...</span>
           </div>
-        )}
+        )} */}
 
         {/* Not connected */}
-        {!isConnected && (
+        {/* {!isConnected && (
           <div className="flex flex-col text-black w-full items-center justify-center py-20">
             <TbWalletOff size={80} />
             <span className="mt-2 text-center">Por favor, conecte sua wallet para continuar.</span>
           </div>
-        )}
+        )} */}
 
         {/* No NFTs */}
         {!isLoading && isConnected && !nfts.length && (
